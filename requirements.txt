@@ -1,0 +1,9 @@
+mcp>=1.2.0
+groq>=0.11.0
+duckdb>=1.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+dotenv
+# Optional: real dense semantic embeddings (otherwise a hashing fallback is used)
+# sentence-transformers>=2.2.0

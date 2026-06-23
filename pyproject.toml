@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-data-analyst"
+version = "0.2.0"
+description = "An MCP-powered AI assistant for conversational data and text analysis (FastMCP server + Groq tool-use agent)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Your Name", email = "you@example.com" }]
+keywords = ["mcp", "model-context-protocol", "llm", "agent", "data-analysis", "nlp", "embeddings", "groq", "duckdb"]
+
+dependencies = [
+    "mcp>=1.2.0",
+    "groq>=0.11.0",
+    "duckdb>=1.0.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+]
+
+[project.optional-dependencies]
+# Real dense semantic embeddings. Without this the project falls back to a
+# dependency-free hashing vectoriser, so it still runs offline.
+embeddings = ["sentence-transformers>=2.2.0"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.6"]
+
+[project.scripts]
+data-analyst = "mcp_data_analyst.cli:main"
+data-analyst-server = "mcp_data_analyst.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_data_analyst"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
